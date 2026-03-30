@@ -1,0 +1,18 @@
+FROM node:20.12.2
+
+WORKDIR /app
+
+# зависимости из корня проекта
+COPY package*.json ./
+RUN npm install
+
+# весь проект
+COPY . .
+
+EXPOSE 8080
+
+ENV NODE_ENV=production
+
+RUN make build
+
+CMD ["make", "start"]
